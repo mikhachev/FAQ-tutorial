@@ -1,0 +1,31 @@
+{% extends 'main.twig' %}
+
+{% block title %}Ответить на вопрос{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2>Ответить на вопрос</h2>
+        <hr>
+
+        <form method="get" action="{{ route('question.store_answer', {'id' : q.id}) }}" accept-charset="utf8">
+            {{ csrf_field() }}
+            {{ method_field('patch') }}
+
+            <label>Автор</label>
+           
+            <label>Тема</label>
+            <input type="text" name="theme" value="{{ q.theme.id }}" placeholder="тема" readonly>
+
+           
+            <label>Вопрос</label>
+            <textarea name="qname" value="" placeholder="Содержание вопроса" required>{{ q.name }}</textarea>
+
+            <label>Ответ</label>
+            <textarea name="qanswer" value="" placeholder="Содержание ответа">{{ q.answer }}</textarea>
+
+            <input type="submit" name="submit" value="Сохранить" class="btn btn-success">
+        </form>
+
+
+    </div>
+{% endblock %}   

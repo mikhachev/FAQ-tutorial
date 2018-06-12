@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../../public/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../../public/bootstrap/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="../../public/bootstrap/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="../../public/bootstrap/css/bootstrap.min.css">
+
+
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+<div class="wrapper">
+    <header>
+        <nav class="navbar">
+            <div class="container container-fluid">
+                <div class="navbar-header">
+                    <h1><a href="{{ route('index') }}">То что вы хотели знать, но боялись спросить</a></h1>
+                    {% if currentUser %}
+                        <h4><a href="{{ route('user.index') }}">Панель администратора</a></h4>
+                    {% endif %}
+                    {% if currentUser %}
+
+                        <li>
+
+                            <form action="{{ route('logout') }}" method="post" accept-charset="utf-8" title="Выйти">
+                                {{ csrf_field() }}
+                                Вы зашли как {{ currentUser.name }} <a href="javascript:;" onclick="parentNode.submit()">Выйти</a>
+                            </form>
+                        </li>
+                    {% else %}
+                        <li><a href="{{ route('home') }}">Войти</a></li>
+                    {% endif %}
+                </div>
+
+
+
+
+            </div>
+        </nav>
+    </header>
+
+    </nav>
+    <div class="content">
+
+        {% block content %}
+        {% endblock %}
+    </div>
+
+
+    <footer>
+        <div class="container">
+            <p> &copy; Evgeny Mikhachev</p>
+        </div>
+    </footer>
+</div>
+</body>
+</html>
+{% block javascripts %}
+    <script src="/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8" async defer></script>
+    <script src="/bootstrap/js/bootstrap.min.js" type="text/javascript" charset="utf-8" async defer></script>
+{% endblock %}

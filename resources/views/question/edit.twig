@@ -1,0 +1,35 @@
+{% extends 'main.twig' %}
+
+{% block title %}Редактировать вопрос{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2>Редактировать вопрос</h2>
+        <hr>
+        <form method="post" action="{{ route('question.update', {'id' : q.id}) }}" accept-charset="utf8">
+            {{ csrf_field() }}
+            {{ method_field('patch') }}
+
+            <label>Автор</label>
+            <input type="text" name="name" value="{{ q.author }}" placeholder="Имя автора" required>
+            <input type="email" name="email" value="{{ q.author_email }}" placeholder="E-mail автора" required>
+
+            <label>Тема</label>
+            <select name="theme">
+                <option value="" disabled>Выберите тему</option>
+
+                {% for th in themes %}
+                    <option value="{{ th.id }}" {{ th.id == q.theme.id ? 'selected' : '' }} >{{ th.name }}</option>
+                {% endfor %}
+            </select>
+           
+            <label>Вопрос</label>
+            <textarea name="qname" value="" placeholder="Содержание вопроса" required>{{ q.name }}</textarea>
+
+            <label>Ответ</label>
+           
+
+            <input type="submit" name="submit" value="Сохранить" class="btn btn-success">
+        </form>
+    </div>
+{% endblock %}   

@@ -1,0 +1,49 @@
+{% extends 'menu_page.twig' %}
+
+{% block subtitle %}
+    Темы
+{% endblock %}
+
+{% block inner_content %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>№ п/п</th>
+            <th>id</th>
+            <th>Название</th>
+            <th>Вопросов</th>
+            <th>Неотвеченных</th>
+            <th>Скрытых</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for th in themes %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ th.id }}</td>
+                <td><a href="{{ route('question.index_by_theme', {'id' : th.id}) }}">{{ th.name }}</a></td>
+                <td>{{ th.questions|length }}</td>
+                <td>{{ th.questionsWaiting|length }}</td>
+                <td>{{ th.questionsHidden|length }}</td>
+
+                <td>
+                    <a href="{{ route('theme.edit', {'id' : th.id}) }}" class="btn btn-success">Редактировать</a>
+
+                    <form action="{{ route('theme.destroy', {'id' : th.id}) }}" method="post" accept-charset="utf-8">
+                        {{ method_field('delete') }}
+                        {{ csrf_field() }}
+                        <input type="hidden" name="id" value="{{ user.id }}">
+                        <input type="submit" class="btn btn-danger" name="submit" value="Удалить">
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+
+    <a href="{{ route('theme.create') }}" class="btn btn-success" title="Добавить тему"><span
+                class="glyphicon glyphicon-plus" aria-hidden="true">Добавить тему</span></a>
+    <br> <br>
+{% endblock %}     

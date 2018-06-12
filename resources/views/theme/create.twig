@@ -1,0 +1,15 @@
+{% extends 'main.twig' %}
+
+{% block title %}Новая тема{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2>Новая тема</h2>
+        <hr>
+        <form method="post" action="{{ route('theme.store') }}" accept-charset="utf8">
+            {{ csrf_field() }}
+            <textarea name="name" value="" placeholder="Название темы" id="form_title" required></textarea>
+            <input type="submit" name="submit" value="Сохранить" class="btn btn-success">
+        </form>
+    </div>
+{% endblock %}   

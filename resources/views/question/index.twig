@@ -1,0 +1,70 @@
+{% extends 'menu_page.twig' %}
+
+
+{% block subtitle %}
+    Вопросы{{ theme is defined ? ': ' ~ theme.name }}
+{% endblock %}
+
+{% block inner_content %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>№</th>
+            <th>id</th>
+            <th>Содержание</th>
+            <th>Тема</th>
+            <th>Автор</th>
+            <th>Создан</th>
+            <th>Статус</th>
+            <th>Ответ</th>
+            <th>Ответил</th>
+            <th>Дата ответа</th>
+            <th>Дата обновления ответа</th>
+            <th>Доступные действия</th>
+        </tr>
+        <tr>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for q in questions %}
+
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ q.id }}</td>
+                <td>{{ q.name }}</td>
+                <td>{{ q.theme.name }}</td>
+                <td>{{ q.author }} (<a href="mailto:{{ q.author_email }}">{{ q.author_email }}</a>)</td>
+                <td>{{ q.question_created|date('d.m.y') }}</td>
+                <td>{{ q.status.name }}</td>
+                <td>
+                    {% if q.answer %}
+                        {{ q.answer|slice(0,50) }}...<br>
+
+                        <a href="{{ route('question.answer_delete', {'id' : q.id}) }}">Удалить ответ</a>
+                    {% else %}
+                        <a href="{{ route('question.create_answer', {'id' : q.id}) }}">Ответить</a>
+
+                    {% endif %}
+                </td>
+                <td>{{ q.user_id }}</td>
+                <td>{{ q.answer_created }}</td>
+                <td>{{ q.answer_updated }}</td>
+
+                <td>
+                    <a href="{{ route('question.hide', {'id' : q.id}) }}"
+                       class="btn btn-primary">{{ q.status.id == 3 ? 'Открыть' : 'Скрыть' }}</a>
+                    <a href="{{ route('question.edit', {'id' : q.id}) }}" class="btn btn-success">Редактировать</a>
+
+                    <form action="{{ route('question.destroy', {'id' : q.id}) }}" method="post" accept-charset="utf-8">
+                        {{ method_field('delete') }}
+                        {{ csrf_field() }}
+                        <input type="hidden" name="id" value="{{ user.id }}">
+                        <input type="submit" class="btn btn-danger" name="submit" value="Удалить">
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}   
