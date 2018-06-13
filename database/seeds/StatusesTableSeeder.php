@@ -20,6 +20,9 @@ class StatusesTableSeeder extends Seeder
         DB::table('statuses')->insert([
             'name' => 'Скрыт',
         ]);
+         DB::table('statuses')->insert([
+            'name' => 'Заблокирован',
+        ]);
       
     }
 }
