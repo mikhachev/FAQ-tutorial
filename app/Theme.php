@@ -35,11 +35,6 @@ class Theme extends Model
         return $this->questions()->where('status_id', Theme::HIDDEN);
     }
 
-    /* public function questionsBlocked()
-    {
-        return $this->questions()->where('status_id', 4);
-    }*/
-
     public function delete()
     {
         foreach ($this->questions as $q) {
