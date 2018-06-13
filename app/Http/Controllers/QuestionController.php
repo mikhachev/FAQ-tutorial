@@ -118,8 +118,6 @@ class QuestionController extends Controller
         $q = Question::find($id);
 
         return view('question.create_answer', compact('q'));
-
-
     }
 
     // редактирование вопроса
@@ -188,6 +186,7 @@ class QuestionController extends Controller
         ]);
 
         Log::channel('user_channel')->info(sprintf(' Вопрос скрыт "%s" (%d) %s', $q->name, $q->id, Auth::user()->name));
+
         return redirect()->route('question.index');
     }
 }
