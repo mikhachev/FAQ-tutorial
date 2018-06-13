@@ -17,9 +17,7 @@ class ForbiddenController extends Controller
     {
         $fwords = Forbidden_word::all();
 
-        return view('theme.index', [
-            'themes' => $themes
-        ]);
+        return view('theme.index', ['themes' => $themes]);
     }
 
 
@@ -55,12 +53,9 @@ class ForbiddenController extends Controller
     }
 
 
-
-
     public function destroy($id)
     {
         $th = Theme::find($id);
-
         $th->delete();
 
         Log::channel('user_channel')->info(" Удалена тема \"{$th->name}\" ({$th->id})" . Auth::user()->name);
