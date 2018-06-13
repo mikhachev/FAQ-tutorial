@@ -23,12 +23,13 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-   {
-        if (Auth::user()->id){
+    {
+        if (Auth::user()->id) {
+
             return redirect()->route('index');
         } else {
+
             return view('home');
         }
 
     }
-}
