@@ -12,7 +12,7 @@ MySQL
 
 Склонировать проект к себе в католог с веб-сервером, скачав его и переметив в нужный каталог, либо :
 ```bash
-$ git clone https://github.com/mikhachev/diplom.git
+$ git clone https://github.com/mikhachev/diplom2.git
 ```
 
 Установить проект 
