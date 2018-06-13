@@ -9,8 +9,11 @@
     <link rel="stylesheet" href="../../public/bootstrap/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="../../public/bootstrap/css/bootstrap-theme.css">
     <link rel="stylesheet" href="../../public/bootstrap/css/bootstrap.min.css">
-
-
+    <link rel="stylesheet" href="../public/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../public/bootstrap/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="../public/bootstrap/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="../public/bootstrap/css/bootstrap.min.css">
+  
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
@@ -31,15 +34,12 @@
                                 {{ csrf_field() }}
                                 Вы зашли как {{ currentUser.name }} <a href="javascript:;" onclick="parentNode.submit()">Выйти</a>
                             </form>
+                            
                         </li>
                     {% else %}
                         <li><a href="{{ route('home') }}">Войти</a></li>
                     {% endif %}
                 </div>
-
-
-
-
             </div>
         </nav>
     </header>
@@ -50,7 +50,6 @@
         {% block content %}
         {% endblock %}
     </div>
-
 
     <footer>
         <div class="container">
