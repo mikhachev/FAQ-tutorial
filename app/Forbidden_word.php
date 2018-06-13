@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Forbidden_word extends Model
 {
-     protected $fillable = [
+    protected $fillable = [
         'word',
     ];
     
