@@ -42,6 +42,7 @@ class UserController extends Controller
         ]);
 
         Log::channel('user_channel')->info(sprintf('Создан пользователь "%s" (%d) %s', $user->name, $user->id, Auth::user()->name));
+
         return redirect()->route('user.index');
     }
 
@@ -61,27 +62,25 @@ class UserController extends Controller
         ]);
     }
 
-
     public function update(Request $request, $id)
     {
         $user = User::find($id);
-
         $user->update([
             'password' => bcrypt($request->password),
         ]);
 
         Log::channel('user_channel')->info(sprintf('Изменен пароль пользователя "%s" (%d) %s', $user->name, $user->id, ' пользователем ' . Auth::user()->name));
+
         return redirect()->route('user.index');
     }
-
 
     public function destroy($id)
     {
         $user = User::find($id);
-
         $user->delete();
 
         Log::channel('user_channel')->info(sprintf('Удален пользователь "%s" (%d) %s', $user->name, $user->id, ' пользователем ' . Auth::user()->name));
+
         return redirect()->route('user.index');
     }
 }
