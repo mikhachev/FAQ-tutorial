@@ -9,7 +9,7 @@ class StatusesTableSeeder extends Seeder
      *
      * @return void
      */
-     public function run()
+    public function run()
     {
         DB::table('statuses')->insert([
             'name' => 'Ждет ответа',
@@ -20,9 +20,8 @@ class StatusesTableSeeder extends Seeder
         DB::table('statuses')->insert([
             'name' => 'Скрыт',
         ]);
-         DB::table('statuses')->insert([
-            'name' => 'Заблокирован',
+        DB::table('statuses')->insert([
+            'name' => 'Под запретом',
         ]);
-      
     }
 }
