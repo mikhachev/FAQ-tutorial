@@ -12,13 +12,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
-define("WAITING", 1);
-define("PUBLISHED", 2);
-define("HIDDEN", 3);
-define("BLOCKED", 4);
+
 
 class QuestionController extends Controller
 {
+    const WAITING = 1;
+    const PUBLISHED = 2;
+    const HIDDEN = 3;
+    const BLOCKED = 4;
 
     public function __construct()
     {
@@ -34,7 +35,7 @@ class QuestionController extends Controller
         ]);
     }
 
-   // вернуть страницу с вопросами по конкретной теме
+    // вернуть страницу с вопросами по конкретной теме
     public function indexByTheme($id)
     {
         $th = Theme::find($id);
@@ -68,7 +69,7 @@ class QuestionController extends Controller
                 $status = 2;
             }
         }*/
-        $status = WAITING;
+        $status = QuestionController::WAITING;
         $q = Question::create([
             'author' => $request->name,
             'author_email' => $request->email,
@@ -92,11 +93,11 @@ class QuestionController extends Controller
 
         $q = Question::find($id);
         $q->update([
-            
+
             'theme_id' => $request->theme,
             'name' => $request->qname,
             'user_id' => Auth::user()->id,
-            'status_id' => PUBLISHED,
+            'status_id' => QuestionController::PUBLISHED,
             'answer' => $request->qanswer,
             'answer_created' =>  Carbon::now(),
 
@@ -146,8 +147,8 @@ class QuestionController extends Controller
             'author_email' => $request->email,
             'theme_id' => $request->theme,
             'name' => $request->qname,
-            
-           
+
+
         ]);
 
 
@@ -176,7 +177,7 @@ class QuestionController extends Controller
         $q->update([
 
             'answer' => null,
-            'status_id' => WAITING,
+            'status_id' => QuestionController::WAITING,
             'user_id' => null,
             'answer_updated' =>  Carbon::now(),
             'answer_created' => null,
@@ -193,14 +194,14 @@ class QuestionController extends Controller
     {
         $q = Question::find($id);
         // Статус "скрыт" имеет id 3,
-        if ($q->status->id != HIDDEN) {
-            $status = HIDDEN;
+        if ($q->status->id != QuestionController::HIDDEN) {
+            $status = QuestionController::HIDDEN;
         } elseif ($q->answer) {
             // Статус "опубликован" имеет id 2,
-            $status = PUBLISHED;
+            $status = QuestionController::PUBLISHED;
         } else {
             // Статус "ждет ответа" имеет id 1,
-            $status = WAITING;
+            $status = QuestionController::WAITING;
         }
 
         $q->update([
