@@ -22,12 +22,11 @@
                     <option value="{{ th.id }}" {{ th.id == q.theme.id ? 'selected' : '' }} >{{ th.name }}</option>
                 {% endfor %}
             </select>
-           
+
             <label>Вопрос</label>
             <textarea name="qname" value="" placeholder="Содержание вопроса" required>{{ q.name }}</textarea>
 
             <label>Ответ</label>
-           
 
             <input type="submit" name="submit" value="Сохранить" class="btn btn-success">
         </form>
