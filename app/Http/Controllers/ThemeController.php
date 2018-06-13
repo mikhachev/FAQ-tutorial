@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Theme;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -11,8 +10,6 @@ use Illuminate\Support\Facades\Log;
 
 class ThemeController extends Controller
 {
-
-
     public function index()
     {
         $themes = Theme::all();
@@ -22,12 +19,10 @@ class ThemeController extends Controller
         ]);
     }
 
-
     public function create()
     {
         return view('theme.create');
     }
-
 
     public function store(Request $request)
     {
@@ -40,25 +35,20 @@ class ThemeController extends Controller
         return redirect()->route('theme.index');
     }
 
-
     public function show($id)
     {
         //
     }
 
-
     public function edit($id)
     {
         $th = Theme::find($id);
-
         return view('theme.edit', ['th' => $th]);
     }
-
 
     public function update(Request $request, $id)
     {
         $th = Theme::find($id);
-
         $th->update([
             'name' => $request->name,
         ]);
@@ -68,11 +58,9 @@ class ThemeController extends Controller
         return redirect()->route('theme.index');
     }
 
-
     public function destroy($id)
     {
         $th = Theme::find($id);
-
         $th->delete();
 
         Log::channel('user_channel')->info(sprintf('  Удалена тема "%s" (%d) %s', $th->name, $th->id, Auth::user()->name));
