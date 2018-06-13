@@ -27,7 +27,6 @@ class CreateQuestionsTable extends Migration
             $table->text('answer')->nullable();
             $table->foreign('theme_id')->references('id')->on('themes');
 
-
         });
     }
 
