@@ -29,7 +29,7 @@ $ php artisan migrate
 $ php artisan db:seed
 ```
 Стартовая страница находится в каталоге /public  проекта.
-по умолчанию, создан администратор admin@admin.com admin
+по умолчанию, создан администратор admin с паролем admin
 
 
 
