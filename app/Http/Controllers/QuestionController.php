@@ -7,12 +7,9 @@ use App\Status;
 use App\Question;
 use App\Forbidden_word;
 use Carbon\Carbon;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-
-
 
 class QuestionController extends Controller
 {
@@ -60,16 +57,7 @@ class QuestionController extends Controller
     // сохранить вопрос
     public function store(Request $request)
     {
-        /*$words = preg_split("/[\s,]+/", "$request->qname");
-        foreach ($words as $value) {
-            $blocked_words = Forbidden_word::where('word', 'LIKE', '%' . $request->word . '%')->get();
-            if ($blocked_words <> null) {
-                $status = 4;
-            } else {
-                $status = 2;
-            }
-        }*/
-        $status = QuestionController::WAITING;
+        $status = Theme::WAITING;
         $q = Question::create([
             'author' => $request->name,
             'author_email' => $request->email,
@@ -80,7 +68,6 @@ class QuestionController extends Controller
             'answer' => null,
 
         ]);
-
 
         Log::channel('user_channel')->info(sprintf('%s %s задал вопрос "%s" ', $q->author, $q->author_email, $q->name));
 
@@ -97,18 +84,16 @@ class QuestionController extends Controller
             'theme_id' => $request->theme,
             'name' => $request->qname,
             'user_id' => Auth::user()->id,
-            'status_id' => QuestionController::PUBLISHED,
+            'status_id' => Theme::PUBLISHED,
             'answer' => $request->qanswer,
-            'answer_created' =>  Carbon::now(),
+            'answer_created' => Carbon::now(),
 
         ]);
-
 
         Log::channel('user_channel')->info(sprintf('Изменен ответ на вопрос "%s" (%d) %s', $q->name, $q->id, Auth::user()->name));
 
         return redirect()->route('question.index');
     }
-
 
     public function show($id)
     {
@@ -148,12 +133,10 @@ class QuestionController extends Controller
             'theme_id' => $request->theme,
             'name' => $request->qname,
 
-
         ]);
 
-
-
         Log::channel('user_channel')->info(sprintf('Изменен вопрос "%s" (%d) %s', $q->name, $q->id, Auth::user()->name));
+
         return redirect()->route('question.index');
     }
 
@@ -161,11 +144,10 @@ class QuestionController extends Controller
     public function destroy($id)
     {
         $q = Question::find($id);
-
         $q->delete();
 
-
         Log::channel('user_channel')->info(sprintf('Удален вопрос "%s" (%d) %s', $q->name, $q->id, Auth::user()->name));
+
         return redirect()->route('question.index');
     }
 
@@ -173,18 +155,15 @@ class QuestionController extends Controller
     public function answer_delete($id)
     {
         $q = Question::find($id);
-
         $q->update([
-
             'answer' => null,
-            'status_id' => QuestionController::WAITING,
+            'status_id' => Theme::WAITING,
             'user_id' => null,
-            'answer_updated' =>  Carbon::now(),
+            'answer_updated' => Carbon::now(),
             'answer_created' => null,
         ]);
 
         Log::channel('user_channel')->info(sprintf('Удален ответ на вопрос "%s" (%d) %s', $q->name, $q->id, Auth::user()->name));
-
 
         return redirect()->route('question.index');
     }
@@ -194,14 +173,14 @@ class QuestionController extends Controller
     {
         $q = Question::find($id);
         // Статус "скрыт" имеет id 3,
-        if ($q->status->id != QuestionController::HIDDEN) {
-            $status = QuestionController::HIDDEN;
+        if ($q->status->id != Theme::HIDDEN) {
+            $status = Theme::HIDDEN;
         } elseif ($q->answer) {
             // Статус "опубликован" имеет id 2,
-            $status = QuestionController::PUBLISHED;
+            $status = Theme::PUBLISHED;
         } else {
             // Статус "ждет ответа" имеет id 1,
-            $status = QuestionController::WAITING;
+            $status = Theme::WAITING;
         }
 
         $q->update([
