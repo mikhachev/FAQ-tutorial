@@ -18,8 +18,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('admin'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
-            // 'created_at' =>  date("Y-m-d H:i:s"),
-            // 'updated_at' =>  date("Y-m-d H:i:s"),
+           
         ]);
     }
 }
