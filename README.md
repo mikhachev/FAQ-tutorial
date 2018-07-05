@@ -28,9 +28,20 @@ $ php artisan migrate
 ```bash
 $ php artisan db:seed
 ```
-Для корректной работы css стилей в файле /diplom/resources/views/main.twig в строках 8-12 просписать полный путь, соотвествующий расположению на вашем хосте.
-Стартовая страница находится в каталоге /public  проекта.
-по умолчанию, создан администратор admin с паролем admin
+Для корректной работы css стилей в файле /diplom/resources/views/main.twig в строках 8-12 просписать полный путь, соотвествующий расположению на вашем хосте. Стартовая страница находится в каталоге /public  проекта.
+
+Другой вариант настройки, это прописать виртуальный хост (если apache, то это файл httpd-vhosts.conf):
+<VirtualHost *:80>
+    ServerAdmin admin@diplom.local
+    DocumentRoot "D:/xampp/htdocs/emikhachev/diplom/public"
+    ServerName diplom.local
+    ErrorLog "logs/diplom-error.log"
+    CustomLog "logs/diplom-access.log" common
+</VirtualHost>
+
+Тогда в main.twig путь к стилям таков: /bootstrap/css/bootstrap.css, и можно удалить .htaccess и index.php из корневого каталога. Сайт в данном случае доступен по адресу diplom.local.
+
+По умолчанию, создан администратор admin с паролем admin
 
 
 
