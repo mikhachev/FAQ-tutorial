@@ -33,7 +33,7 @@ $ php artisan db:seed
 Другой вариант настройки, это прописать виртуальный хост (если apache, то это файл httpd-vhosts.conf):
 <VirtualHost *:80>
     ServerAdmin admin@diplom.local
-    DocumentRoot "D:/xampp/htdocs/emikhachev/diplom/public"
+    DocumentRoot "full route to public folder"
     ServerName diplom.local
     ErrorLog "logs/diplom-error.log"
     CustomLog "logs/diplom-access.log" common
