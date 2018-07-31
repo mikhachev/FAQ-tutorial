@@ -28,9 +28,8 @@ $ php artisan migrate
 ```bash
 $ php artisan db:seed
 ```
-Стартовая страница находится в каталоге /public  проекта.
-
-Другой вариант настройки, это прописать виртуальный хост (если apache, то это файл httpd-vhosts.conf):
+Настроить веб сервер на каталог /public проекта: 
+Прописать виртуальный хост (если apache, то это файл httpd-vhosts.conf):
 <VirtualHost *:80>
     ServerAdmin admin@diplom.local
     DocumentRoot "full route to public folder"
