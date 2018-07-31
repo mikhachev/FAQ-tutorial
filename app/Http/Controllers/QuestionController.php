@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Theme;
 use App\Status;
 use App\Question;
-use App\Forbidden_word;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,10 +12,7 @@ use Illuminate\Support\Facades\Log;
 
 class QuestionController extends Controller
 {
-    const WAITING = 1;
-    const PUBLISHED = 2;
-    const HIDDEN = 3;
-    const BLOCKED = 4;
+    
 
     public function __construct()
     {
@@ -76,7 +72,7 @@ class QuestionController extends Controller
 
 
     public function store_answer(Request $request, $id)
-    {
+    { 
 
         $q = Question::find($id);
         $q->update([
@@ -184,7 +180,6 @@ class QuestionController extends Controller
         $q->update([
             'status_id' => $status,
         ]);
-
         Log::channel('user_channel')->info(sprintf(' Вопрос скрыт "%s" (%d) %s', $q->name, $q->id, Auth::user()->name));
 
         return redirect()->route('question.index');
