@@ -27,11 +27,6 @@ class Question extends Model
         return $this->belongsTo('App\Theme');
     }
 
-    /*public function create_answer()
-    {
-        
-    }*/
-
     public function status()
     {
         return $this->belongsTo('App\Status');
@@ -39,8 +34,7 @@ class Question extends Model
 
     public function delete()
     {
-
-
+        parent::delete();
     }
 
 
