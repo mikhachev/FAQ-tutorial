@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Log;
 class QuestionController extends Controller
 {
     
-
     public function __construct()
     {
         $this->middleware('auth')->except('create', 'store');
@@ -166,14 +165,11 @@ class QuestionController extends Controller
     public function hide($id)
     {
         $q = Question::find($id);
-        // Статус "скрыт" имеет id 3,
         if ($q->status->id != Theme::HIDDEN) {
             $status = Theme::HIDDEN;
         } elseif ($q->answer) {
-            // Статус "опубликован" имеет id 2,
             $status = Theme::PUBLISHED;
         } else {
-            // Статус "ждет ответа" имеет id 1,
             $status = Theme::WAITING;
         }
 
