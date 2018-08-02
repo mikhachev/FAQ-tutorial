@@ -4,7 +4,6 @@
 
 {% block content %}
     <div class="container">
-
         <div class="row">
             <div class="col-md-3 aside">
                 <h3>Темы</h3>
@@ -22,9 +21,6 @@
 
             </div>
             <div class="col-md-9">
-
-                {#
-                            <hr> #}
                 {% for q in theme.questionsPublished %}
                     <div class="panel panel-success class">
                         <div class="panel-heading">
@@ -37,6 +33,5 @@
                 {% endfor %}
             </div>
         </div>
-
     </div>
 {% endblock %}   
