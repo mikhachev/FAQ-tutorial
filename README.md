@@ -38,7 +38,6 @@ $ php artisan db:seed
     CustomLog "logs/diplom-access.log" common
 </VirtualHost>
 
-Тогда в main.twig путь к стилям таков: /bootstrap/css/bootstrap.css, и можно удалить .htaccess и index.php из корневого каталога. Сайт в данном случае доступен по адресу diplom.local.
 
 По умолчанию, создан администратор admin с паролем admin
 
